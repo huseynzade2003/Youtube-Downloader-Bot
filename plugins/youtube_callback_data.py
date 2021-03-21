@@ -23,11 +23,11 @@ async def catch_youtube_fmtid(c, m):
         print(media_type)
         if media_type == 'audio':
             buttons = InlineKeyboardMarkup([[InlineKeyboardButton(
-                "Audio", callback_data=f"{media_type}||{format_id}||{yturl}"), InlineKeyboardButton("Document",
+                "Audio", callback_data=f"{media_type}||{format_id}||{yturl}"), InlineKeyboardButton("Sənəd",
                                                                                                     callback_data=f"docaudio||{format_id}||{yturl}")]])
         else:
             buttons = InlineKeyboardMarkup([[InlineKeyboardButton(
-                "Video", callback_data=f"{media_type}||{format_id}||{yturl}"), InlineKeyboardButton("Document",
+                "Video", callback_data=f"{media_type}||{format_id}||{yturl}"), InlineKeyboardButton("Sənəd",
                                                                                                     callback_data=f"docvideo||{format_id}||{yturl}")]])
 
         await m.edit_message_reply_markup(buttons)
@@ -43,7 +43,7 @@ async def catch_youtube_dldata(c, q):
     yturl = cb_data.split("||")[-1]
     format_id = cb_data.split("||")[-2]
     if not cb_data.startswith(("video", "audio", "docaudio", "docvideo")):
-        print("no data found")
+        print("məlumat tapılmadı")
         raise ContinuePropagation
 
     filext = "%(title)s.%(ext)s"
@@ -114,14 +114,14 @@ async def catch_youtube_dldata(c, q):
     if med:
         loop.create_task(send_file(c, q, med, filename))
     else:
-        print("med not found")
+        print("media tapılmadı")
 
 
 async def send_file(c, q, med, filename):
     print(med)
     try:
         await q.edit_message_reply_markup(
-            InlineKeyboardMarkup([[InlineKeyboardButton("Uploading...", callback_data="down")]]))
+            InlineKeyboardMarkup([[InlineKeyboardButton("Yüklənir...", callback_data="down")]]))
         await c.send_chat_action(chat_id=q.message.chat.id, action="upload_document")
         # this one is not working
         await q.edit_message_media(media=med)
