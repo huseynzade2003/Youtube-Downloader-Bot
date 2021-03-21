@@ -13,7 +13,7 @@ plugins = dict(
 )
 
 Client(
-    "YouTubeDlBot",
+    "Hüsü YT▶️",
     bot_token=BOT_TOKEN,
     api_id=APP_ID,
     api_hash=API_HASH,
