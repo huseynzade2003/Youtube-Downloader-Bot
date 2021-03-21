@@ -4,11 +4,11 @@ import json
 
 def probe(vid_file_path):
     """
-    Give a json from ffprobe command line
-    @vid_file_path : The absolute (full) path of the video file, string.
+    ffprobe əmr sətrindən bir json verin
+    @vid_file_path : Video faylının mütləq (tam) yolu, sətri.
     """
     if type(vid_file_path) != str:
-        raise Exception('Give ffprobe a full file path of the file')
+        raise Exception('Ffprobe'ya faylın tam bir fayl yolu verin')
 
     command = ["ffprobe",
                "-loglevel", "quiet",
